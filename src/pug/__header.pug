@@ -1,0 +1,20 @@
+include __mixins.pug
+mixin nav-links(options, liClass)
+    ul(class!=attributes.class)
+        each item in options
+            li(class=liClass)
+                a(href=item[1] data-goto=item[2] class=liClass)= item[0]
+header.header#header
+    .header__container
+        a(href="#").logo.header__logo
+            include svg/Logo.svg
+        -
+            var list = [["Home","#", ".start"], ["About Us","#", ".choose"],
+                ["Services","#",".employees"], ["Project","#",".blog"]]
+        
+        .header__menu.menu
+            .menu__icon 
+                button.menu__icon-svg
+            nav.menu__body
+                +nav-links(list, 'menu__link')(class=" menu__list")
+

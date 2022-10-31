@@ -1,0 +1,31 @@
+//null-style
+@import "__null-style.scss";
+//fonts
+
+//ibg
+@import "__ibg.scss";
+//Consts============================
+
+//COLORS
+
+
+
+//General style
+
+
+//==================================
+
+//header
+@import "__header.scss";
+//sections
+
+//footer
+@import "__footer.scss";
+//==================================
+
+@media (max-width: 1300px) {
+    .header {
+        top: 20px;
+    }
+}
+
