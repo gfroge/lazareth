@@ -6,17 +6,136 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="assets/css/style.css")
         link(rel="shortcut icon", href="assets/images/favicon.ico", type="image/x-icon")
-        title Construction
+        title Лазарет центр
     body
         include pug/__header.pug
 
         main.main
+            .container.large.start__wrapper
+                section.start
+                    .start__image 
+                        picture
+                            source(srcset="assets/images/start.webp") 
+                            img(src="assets/images/start.png", alt="") 
+                    .container.large.start__container
+                        h1.start__title.text-primary Бережем Ваше здоровье
+                        .start__subtitle.text-secondary Только доказательная медицина и квалифицированные врачи
+                        .searchbar__wrap
+                            form.searchbar.default-light
+                                input(type="text" placeholder="Введите имя доктора...").searchbar__input.text-field.default-light
+                                button.searchbar__button.secondary-main Поиск
+                            ul.searchbar__result.default-light.text-secondary._hidden
+                                li safasdf
+
+            mixin about-stat(num, name)
+                .about-stat
+                    h4.about-stat__title.text-primary=num 
+                    .about-stat__name=name
+
+            .container.large.about__wrapper 
+                section.about
+                    .about__circle
+                        .about__circle-text О Нас    
+                        picture.about__image
+                            source(srcset="assets/images/about.webp") 
+                            img(src="assets/images/about.jpg", alt="")
+                    .about__info 
+                        h2.about__title.text-primary.h2 Работаем без выходных уже 5 лет
+                        .about__stats 
+                            +about-stat('3', 'Клиники')
+                            +about-stat('52', 'Врача')
+                            .about__main-stat
+                                h4.about__main-stat-title.text-primary 7
+                                .about__main-stat-subtitle.text-secondary Дней в неделю
+                        .about__subtitle.text-secondary Свое здоровье нам доверили уже более 6000 пациентов  
+
+            mixin facility-slide(path,alt='услуга',title,desc,popTitle,popOptions,popPrices,popTimetable)
+                .facility-slide
+                    .facility-slide__image.ibg
+                        img(src=path, alt=alt)
+                    .facility-slide__info
+                        .facility-slide__text
+                            h5.facility-slide__title.text-primary=title
+                            .facility-slide__description.text-secondary=desc
+                        button.facility-slide__btn.green-button Подробнее
+                    .facility-slide__popup.facility-popup
+                        h5.facility-popup__title.text-primary=popTitle
+                        ul.facility-popup__options 
+                            - for (var i = 0; i < popOptions.length; i++)
+                                li 
+                                    =popOptions[i]
+                                    strong 
+                                        =popPrices[i]
+                        ul.facility-popup__timetable
+                            li
+                                strong Пн:
+                                =` ${popTimetable[0]}`
+                            li
+                                strong Вт:
+                                =` ${popTimetable[1]}`
+                            li
+                                strong Ср:
+                                =` ${popTimetable[2]}`
+                            li
+                                strong Чт:
+                                =` ${popTimetable[3]}`
+                            li
+                                strong Пт:
+                                =` ${popTimetable[4]}`
+                            li
+                                strong Сб:
+                                =` ${popTimetable[5]}`
+                            li
+                                strong Вс:
+                                =` ${popTimetable[6]}`
+                        button.facility-popup__btn.green-button Назад
+
+            
+            .container.large.facility__wrapper
+                img(src="assets/images/perfo.svg", alt="").facility__perfo
+                section.facility 
+                    h2.h2.blue.facility__title Наши Услуги
+                    .slider.facility__slider
+                        .slider__item 
+                            +facility-slide('assets/images/facility/uzi.jpg','узи',
+                        'УЗИ','УЗИ любых внутренних органов (без консультации врача)',
+                        'Клиника 1 (на Ворфоломеева)', ['Обследование:','Консультация врача:'], ['5000₽','2000₽ (-15% при обследовании у нас)'],
+                        ['12:00-14:00','12:00-14:00','12:00-14:00','12:00-14:00','14:00-16:00', '10:00-12:00','10:00-12:00'])
+                        .slider__item
+                            +facility-slide('assets/images/facility/terapevt.jpg','терапевт',
+                        'Терапевт','Обследование, назначение лечения или анализов по жалобам пациента',
+                        'Клиника 1, 2, 3', ['Консультация врача:'], ['1000₽'],
+                        ['11:00-16:00','11:00-16:00','11:00-16:00','-','-', '10:00-12:00','10:00-12:00'])
+                        .slider__item
+                            +facility-slide('assets/images/facility/ginekolog.jpg','гинеколог',
+                        'Гинеколог','Консультация и/или обследование',
+                        'Клиника 2 (на Ленина)', ['Консультация врача:','Взятие мазка:'], ['2000₽','1000₽'],
+                        ['14:00-18:00','-','12:00-14:00','-','14:00-16:00', '-','-'])
+                        .slider__item
+                            +facility-slide('assets/images/facility/surgery.jpg','хирург',
+                        'Хирург','Переломы, вывихи, порезы, ожоги и другие травмы',
+                        'Клиника 1,2', ['Обследование:','Наложение/Снятие гипса:','Обработка порезов, ожогов, вывихов'], ['1000₽','1500₽','1800₽'],
+                        ['12:00-14:00','12:00-14:00','12:00-14:00','12:00-14:00','14:00-16:00', '10:00-12:00','10:00-12:00'])
+                        .slider__item
+                            +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
+                        'Стоматолог (Ортодонт)','Профилактика и лечение зубо-челюстных аномалий',
+                        'Клиника 3 (на Московской)', ['Обследование и чистка:','Лечение одного зуба и установка пломбы:'], ['2000₽','5000₽'],
+                        ['-','-','12:00-18:00','12:00-18:00','12:00-18:00', '-','-'])
+                        .slider__item
+                            +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
+                        'Стоматолог (Хирургия)','Удаление зубов, установка имплантов, лечение воспалительных процессов',
+                        'Клиника 3 (на Московской)', ['Обследование:','Импланты зубов:','Лечение воспалительных процессов:','Удаление одного зуба:'], ['1000₽','Цена сообщается индивидуально после обследования','2000₽','2000₽'],
+                        ['12:00-18:00','12:00-14:00','12:00-18:00','12:00-14:00','-', '-','-'])
+                        
+
+
+                       
 
 
         include pug/__footer.pug
         
-        script(src="js/ibg.js")
-        script(src="js/header.js")  
-        script(src="js/jquery-3.6.0.min.js")
-        script(src="js/slick.min.js")
-        script(src="js/script.js") 
+        script(src="assets/js/ibg.js")
+        script(src="assets/js/header.js")  
+        script(src="assets/js/jquery-3.6.0.min.js")
+        script(src="assets/js/slick.min.js")
+        script(src="assets/js/script.js") 

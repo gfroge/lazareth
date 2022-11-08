@@ -1,18 +1,97 @@
 //null-style
 @import "__null-style.scss";
 //fonts
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Roboto:wght@300;400;500;700&display=swap");
+// font-family: 'Lato', sans-serif;
+// font-family: 'Roboto', sans-serif;
 
 //ibg
 @import "__ibg.scss";
-//Consts============================
+//Consts
+@import "__consts.scss";
 
-//COLORS
-
-
-
-//General style
-
-
+//General style===============
+.container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1100px;
+    &.large {
+        max-width: 1400px;
+        padding: 0 10px;
+    }
+}
+.h2 {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 158%;
+    &.blue {
+        color: #01579b;
+        font-weight: 700;
+        font-size: 52px;
+        word-wrap: break-word;
+        max-width: 300px;
+        line-height: 128%;
+    }
+}
+.green-button {
+    background-color: #4caf50;
+    color: #fff;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease 0s;
+    &:hover {
+        background-color: #357a38;
+    }
+}
+._hidden {
+    display: none !important;
+    pointer-events: none !important;
+}
+.searchbar {
+    width: 100%;
+    padding: 20px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__input {
+        font-size: 20px;
+        padding: 0 20px 0 20px;
+        width: 100%;
+    }
+    &__button {
+        font-size: 14px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius: 20px;
+        padding: 13px 60px;
+        text-align: center;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            background-color: #357a38;
+        }
+    }
+    &__wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 760px;
+        margin-left: -40px;
+    }
+    &__result {
+        width: 100%;
+        padding: 15px;
+        font-size: 20px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 0 0 40px 40px;
+        transition: all 0.45s ease 0s;
+    }
+}
 //==================================
 
 //header
@@ -22,6 +101,293 @@
 //footer
 @import "__footer.scss";
 //==================================
+* {
+    font-family: "Roboto", sans-serif;
+}
+.start {
+    padding: 180px 0 0 0;
+    height: 730px;
+    max-height: 100vh;
+    position: relative;
+    &__wrapper {
+        background: url("../images/bg1.svg");
+        background-repeat: no-repeat;
+        background-position: top right;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    &__image {
+        position: absolute;
+        top: 100px;
+        right: 0;
+        max-width: 500px;
+        img {
+            max-width: 100%;
+        }
+    }
+    &__title {
+        font-size: 64px;
+        max-width: 550px;
+        font-weight: 700;
+    }
+    &__subtitle {
+        font-size: 32px;
+        max-width: 550px;
+        margin: 40px 0;
+    }
+}
+
+.about {
+    padding-top: 100px;
+    margin-top: -100px;
+    display: flex;
+    padding-bottom: 115px;
+    justify-content: space-between;
+    &__wrapper {
+        background: url("../images/bg2.svg");
+        background-repeat: no-repeat;
+        background-position: top left;
+    }
+    &__circle {
+        border: 1px solid #03a9f4;
+        padding: 50px;
+        border-radius: 50%;
+        width: 400px;
+        height: 400px;
+        position: relative;
+    }
+    &__circle-text {
+        font-weight: 700;
+        font-size: 50px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+    &__image {
+        border-radius: 50%;
+        img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+    }
+    &__info {
+        max-width: 800px;
+        padding-top: 25px;
+    }
+    &__stats {
+        display: flex;
+        padding: 35px 0 35px 0;
+        .about-stat:nth-child(2) {
+            margin-left: -50px;
+        }
+    }
+    &__main-stat {
+        max-width: 190px;
+        text-align: right;
+        margin-left: -50px;
+    }
+    &__main-stat-title {
+        font-size: 60px;
+        font-weight: 700;
+    }
+    &__main-stat-subtitle {
+        font-size: 26px;
+        font-weight: 400;
+    }
+    &__subtitle {
+        max-width: 550px;
+        font-weight: 300;
+        line-height: 145%;
+        font-size: 24px;
+        padding-left: 15px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 3px;
+            background-color: rgba(0, 0, 0, 0.12);
+        }
+    }
+}
+
+.about-stat {
+    position: relative;
+    height: 120px;
+    width: 250px;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 67px;
+        left: 90px;
+
+        display: block;
+        height: 1px;
+        width: 140px;
+        background-color: #c8e6c9;
+
+        transform: rotate(-45deg);
+    }
+    &__title {
+        font-size: 42px;
+        font-weight: 700;
+        padding-right: 40px;
+        text-align: right;
+        max-width: 200px;
+    }
+    &__name {
+        font-weight: 400;
+        position: absolute;
+        top: 50%;
+        margin-top: -12px;
+        font-size: 26px;
+        width: 180px;
+        color: #2e7d32;
+        background-color: #c8e6c9;
+        border-radius: 40px 0 0 40px;
+        border: 0 0 50px 0;
+        padding: 5px 35px 5px 25px;
+
+        clip-path: polygon(0 0, 0 100%, 80% 100%, 100% 0, 0 0);
+    }
+}
+
+.facility {
+    margin-top: -100px;
+
+    &__wrapper {
+        background: url("../images/bg3.svg");
+        background-repeat: no-repeat;
+        background-position: top right;
+        height: 1000px;
+        position: relative;
+    }
+    &__perfo {
+        position: absolute;
+        top: 20px;
+        left: 80px;
+    }
+    &__title {
+        position: absolute;
+        top: 35%;
+        right: 0;
+        padding-right: 20px;
+    }
+}
+
+.facility-slide {
+    width: 300px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 40px;
+    position: relative;
+    &__image {
+        width: 100%;
+        height: 40%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 40px 40px 60px 0px;
+    }
+    &__info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        padding-top: 65%;
+    }
+    &__title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    &__description {
+        font-size: 18px;
+    }
+
+    &__btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 65%;
+        height: 60px;
+        border-radius: 40px 0px 40px 0px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75);
+    -webkit-box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75);
+    -moz-box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75);    &._facility-popup{
+        .facility-slide__popup{
+            opacity: 1;
+        }
+    }
+    &._facility-pointer{
+        .facility-slide__popup{
+            pointer-events: all;
+        }
+    }
+}
+
+.facility-popup {
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s ease 0s;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    padding: 20px;
+    padding-top: 30px;
+    border-radius: 40px;
+    background-color: #b3e5fc;
+    &__title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    &__options {
+        font-size: 18px;
+        padding-left: 20px;
+        li {
+            list-style: initial;
+        }
+        margin: 20px 0;
+    }
+
+    &__timetable {
+        font-size: 17px;
+        line-height: 1.4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 65%;
+        height: 60px;
+        border-radius: 40px 0px 40px 0px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
 
 @media (max-width: 1300px) {
     .header {
@@ -29,3 +395,4 @@
     }
 }
 
+@import "__slick-slider.scss";
