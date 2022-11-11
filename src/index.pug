@@ -99,7 +99,7 @@ html(lang="en")
                         .slider__item 
                             +facility-slide('assets/images/facility/uzi.jpg','узи',
                         'УЗИ','УЗИ любых внутренних органов (без консультации врача)',
-                        'Клиника 1 (на Ворфоломеева)', ['Обследование:','Консультация врача:'], ['5000₽','2000₽ (-15% при обследовании у нас)'],
+                        'Клиника 1', ['Обследование:','Консультация врача:'], ['5000₽','2000₽ (-15% при обследовании у нас)'],
                         ['12:00-14:00','12:00-14:00','12:00-14:00','12:00-14:00','14:00-16:00', '10:00-12:00','10:00-12:00'])
                         .slider__item
                             +facility-slide('assets/images/facility/terapevt.jpg','терапевт',
@@ -109,7 +109,7 @@ html(lang="en")
                         .slider__item
                             +facility-slide('assets/images/facility/ginekolog.jpg','гинеколог',
                         'Гинеколог','Консультация и/или обследование',
-                        'Клиника 2 (на Ленина)', ['Консультация врача:','Взятие мазка:'], ['2000₽','1000₽'],
+                        'Клиника 2', ['Консультация врача:','Взятие мазка:'], ['2000₽','1000₽'],
                         ['14:00-18:00','-','12:00-14:00','-','14:00-16:00', '-','-'])
                         .slider__item
                             +facility-slide('assets/images/facility/surgery.jpg','хирург',
@@ -119,19 +119,104 @@ html(lang="en")
                         .slider__item
                             +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
                         'Стоматолог (Ортодонт)','Профилактика и лечение зубо-челюстных аномалий',
-                        'Клиника 3 (на Московской)', ['Обследование и чистка:','Лечение одного зуба и установка пломбы:'], ['2000₽','5000₽'],
+                        'Клиника 3', ['Обследование и чистка:','Лечение одного зуба и установка пломбы:'], ['2000₽','5000₽'],
                         ['-','-','12:00-18:00','12:00-18:00','12:00-18:00', '-','-'])
                         .slider__item
                             +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
                         'Стоматолог (Хирургия)','Удаление зубов, установка имплантов, лечение воспалительных процессов',
-                        'Клиника 3 (на Московской)', ['Обследование:','Импланты зубов:','Лечение воспалительных процессов:','Удаление одного зуба:'], ['1000₽','Цена сообщается индивидуально после обследования','2000₽','2000₽'],
+                        'Клиника 3', ['Обследование:','Импланты зубов:','Лечение воспалительных процессов:','Удаление одного зуба:'], ['1000₽','Цена сообщается индивидуально после обследования','2000₽','2000₽'],
                         ['12:00-18:00','12:00-14:00','12:00-18:00','12:00-14:00','-', '-','-'])
                         
 
+            mixin doc-card(src,alt,name,job,rating,exp,dataJob)
+                div(data-job=dataJob).doc-card._visible
+                    .doc-card__photo.ibg
+                        img(src=src, alt=alt)
+                    .doc-card__text   
+                        .doc-card__name.text-primary=name 
+                        .doc-card__job.text-secondary=job 
+                    .doc-card__stats-wrap 
+                        .doc-card__stats
+                            .doc-card__rating.text-secondary
+                                include pug/svg/thumbsup.svg
+                                =rating 
+                            .doc-card__experience.text-secondary
+                                include pug/svg/job.svg
+                                =exp
 
-                       
+            .container.large.doctors__wrapper
+                section.doctors
+                    .doctors__menu
+                        h2.h2.doctors__title Наши лучшие врачи
+                        ul.doctors__list
+                            - let arr = ["Все", 'Терапевты', 'Гинекологи', 'Хирурги', 'Стоматологи', 'Врачи УЗДГ']
+                            - let dataSet = ["any","therapist",'gynecologist','surgeon','dentist','ultrasound'] 
+                            - for (var i = 0; i < arr.length; i++)
+                                if (i > 0)
+                                    li(data-job=dataSet[i]).doctors__li
+                                        =arr[i]
+                                else 
+                                    li(data-job=dataSet[0]).doctors__li.active
+                                        strong 
+                                            =arr[i]
+                    .doctors__content
+                        +doc-card('assets/images/docs/1.jpg','фото врача','Лебедев Грирорий Николаевич','Хирург','100%','25 лет опыта','surgeon')
+                        +doc-card('assets/images/docs/5.jpg','фото врача','Петрова Жанна Алексеевна','Врач УЗДГ','95%','19 лет опыта','ultrasound')
+                        +doc-card('assets/images/docs/2.jpg','фото врача','Семёнов Олег Александрович','Терапевт','95%','15 лет опыта','therapist')
+                        +doc-card('assets/images/docs/6.jpg','фото врача','Шубин Сергей Дмитриевич','Стоматолог','90%','17 лет опыта','dentist')
+                        +doc-card('assets/images/docs/4.jpg','фото врача','Антонова Любовь Сергеевна','Гинеколог','100%','14 лет опыта','gynecologist')
+                        +doc-card('assets/images/docs/3.jpg','фото врача','Иванов Андрей Андреевич','Стоматолог','95%','20 лет опыта','surgeon')
+
+            mixin slider__item(text, starsNum, name, src)
+                .slider__item
+                    .slider__item.testimonial
+                        .testimonial__text.text-primary=text 
+                        //- make number depandant on stars number
+                        .testimonial__stars=starsNum   
+                        .testimonial__user   
+                            .testimonial__name.text-primary=name 
+                            .testimonial__avatar.ibg
+                                img(src=src, alt="фото") 
+            
+            .container.large.testimonials__wrapper 
+                section.testimonials
+                    h2.testimonials__title.h2.blue Отзывы
+                    .testimonials__slider.slider
+                        +slider__item('Хочу сказать большое Спасибо врачу Шубину Сергею Дмитриевичу! Вылечил зуб, с которым не могли помочь 3 разных врача из государственных поликлиник!', 5, 'Alex022',
+                         "assets/images/testimonials/default.jpg")
+                        +slider__item('Жанна Алексеевна отлично сделала узи! Лечащий врач сказал, что на снимках все отлично видно, и теперь можно поставить правильный диагноз', 5, 'Аня',
+                         "assets/images/testimonials/1.jpg")
+                        +slider__item('Приветливый персонал, красивые и чистые кабинеты. Правда к врачам порой приходится записываться за много дней, но ожидание того стоит', 4, 'Сергей',
+                         "assets/images/testimonials/2.jpg")
+                        +slider__item('Всегда хожу лечить зубы только в эту клинику', 5, 'Sonya1452',                   
+                        "assets/images/testimonials/default.jpg")
+                .appointment 
+                    .appointment__text
+                        h4.appointment__title.text-primary Запишитесь к врачу в два клика
+                        .appointment__subtitle.text-primary Скидка -15% на первый прием!
+                    a(href="").appointment__link.primary-main Записаться
+
+            mixin address__address-block(title,phone,email,location,src)
+                .address__address-block.address-block
+                    h5.address-block__title=title
+                    .address-block__contacts
+                        a(href="" type="phone").address-block__phone.link-underline=phone 
+                        a(href="" type="email").address-block__email.link-underline=email 
+                        a(href=src).address-block__location.link-underline=location 
 
 
+            .container.large.address__wrapper
+                section.address
+                    .address__info
+                        h2.h2 Наши клиники
+                        +address__address-block('Клиника 1','+79999999999-1','clinic1@lazareth.ru','Милютинский пер., 5 строение 2','https://www.google.com/maps/place/%D0%9C%D0%B8%D0%BB%D1%8E%D1%82%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80.,+5+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+2,+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+101000/@55.7573604,37.612889,13.08z/data=!4m5!3m4!1s0x46b54a5d92a62c91:0x5de3d1acbe1f67db!8m2!3d55.7622729!4d37.6313697')
+                        +address__address-block('Клиника 2','+79999999999-2','clinic2@lazareth.ru','3-я Тверская-Ямская ул.','https://www.google.com/maps/place/3-%D1%8F+%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F-%D0%AF%D0%BC%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB.,+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+125047/@55.7744669,37.5860632,15.13z/data=!4m5!3m4!1s0x46b54a3d32b46d63:0xcc14d5483aadf272!8m2!3d55.7751375!4d37.5911045')
+                        +address__address-block('Клиника 3','+79999999999-3','clinic3@lazareth.ru','ул. Покровка, 45 строение 2','https://www.google.com/maps/place/%D1%83%D0%BB.+%D0%9F%D0%BE%D0%BA%D1%80%D0%BE%D0%B2%D0%BA%D0%B0,+45+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+2,+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+105064/@55.7647417,37.6499578,16.83z/data=!4m5!3m4!1s0x46b54a8991c563b1:0xcf3eb8afea32f7d1!8m2!3d55.7627688!4d37.6528698')
+                    .address__map
+                        picture
+                            source(srcset="assets/images/map/1.webp") 
+                            img(src="assets/images/map/1.jpg", alt="карта")     
+            
         include pug/__footer.pug
         
         script(src="assets/js/ibg.js")
