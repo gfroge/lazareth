@@ -1,0 +1,25 @@
+mixin footer-links-col(title,optionsArr)
+    h4.footer__title=title 
+    ul.footer__links 
+        - for (var i = 0; i < optionsArr.length; i++)
+            li
+                a(href="").footer__link.link-underline.text-secondary  
+                    =optionsArr[i]
+
+.container.large 
+    footer.footer
+        .footer__col
+            .footer__logo 
+                img(src="assets/images/grey-logo.png", alt="")
+            .footer__slogan.text-secondary Лучшая медицина по доступным ценам.
+            .footer__copyright.text-secondary © ООО "ЛАЗАРЕТ МЕДИКАЛ КОМПАНИ" 2022
+        .footer__col
+            +footer-links-col('О компании',['Наша история','Вакансии','Сведения об организации'])
+        .footer__col
+            +footer-links-col('Сервисы',['Новостная рассылка','Выезд на дом','Для компаний - обследование сотрудников']) 
+        .footer__col.footer__col--social
+            a(href="").footer__social
+                include svg/tg.svg
+            a(href="").footer__social
+                include svg/wa.svg    
+            

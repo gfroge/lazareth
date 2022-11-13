@@ -40,16 +40,15 @@ if (menuLinks.length > 0) {
 }
 
 // header fixed
-const header = document.querySelector('header');
-function checkScroll() {
-    let scrollPos = window.scrollY;
-    if ((scrollPos > 80) || (window.innerWidth <= 870)) {
-        header.classList.add("header--fixed");
-    }
-    else {
-        header.classList.remove("header--fixed")
-    }
-}
-document.addEventListener("DOMContentLoaded", checkScroll);
-window.addEventListener("scroll", checkScroll);
-window.addEventListener("resize", checkScroll);
+// const header = document.querySelector('header');
+// function checkScroll() {
+//     if (window.innerWidth <= 870) {
+//         header.classList.add("header--fixed");
+//     }
+//     else {
+//         header.classList.remove("header--fixed")
+//     }
+// }
+// document.addEventListener("DOMContentLoaded", checkScroll);
+// window.addEventListener("scroll", checkScroll);
+// window.addEventListener("resize", checkScroll);

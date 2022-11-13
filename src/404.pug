@@ -1,0 +1,20 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="assets/css/style.css")
+        link(rel="shortcut icon", href="assets/images/favicon.ico", type="image/x-icon")
+        title Лазарет центр
+    body
+        include pug/__header.pug
+        
+        main 
+            section.container.not-found 
+                .not-found__image 404 
+                .not-found__text 
+                    h1.not-found__title.text-primary Страница не найдена 
+                    a(href="index.html").not-found__back-link.primary-main Назад     
+
+        include pug/__footer.pug
+        script(src="assets/js/header.js")

@@ -102,6 +102,77 @@
         transition: all 0.45s ease 0s;
     }
 }
+.nav {
+    position: fixed;
+    bottom: 100px;
+    right: 7vw;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__options {
+        margin-bottom: 15px;
+    }
+    &__section {
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+    &__text {
+        position: absolute;
+        top: 0px;
+        left: -500%;
+        width: 480%;
+        height: 100%;
+        background-color: #03A9F4;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease 0s;
+        transform: scale(0);
+        &.active{
+            transform: scale(1);
+        }
+    }
+
+    &__bullet {
+        display: block;
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        border: 3px solid rgba($color: #01579b, $alpha: 0.5);
+        transform: rotate(-45deg);
+        &.active{
+            background-color: #b3e5fc;
+        }
+        transition: all 0.3s ease 0s;
+        &:hover{
+            background-color: #bfe8fb;
+        }
+    }
+
+    &__up {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #b3e5fc;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            background-color: #9bdbfd;
+        }
+    }
+}
+
 //==================================
 
 //header
@@ -606,7 +677,8 @@
     margin: 0 auto;
     width: 100%;
     max-width: 1000px;
-    margin-top: 190px;
+    margin-top: 230px;
+    margin-bottom: 150px;
     border-radius: 20px;
     background-color: transparent;
     border: 2px solid #03a9f4;
@@ -632,18 +704,22 @@
         justify-content: center;
         align-items: center;
         font-weight: 500;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            background-color: #0077aa;
+        }
     }
 }
 
 .address {
     padding-top: 100px;
+    padding-bottom: 100px;
     display: flex;
     justify-content: space-between;
     &__wrapper {
         background: url("../images/bg2.svg");
         background-repeat: no-repeat;
         background-position: top left;
-        height: 1000px;
     }
 
     &__info {
@@ -665,7 +741,6 @@
             width: 800px;
         }
     }
-
 }
 
 .address-block {
@@ -695,12 +770,6 @@
 
     &__location {
         grid-area: location;
-    }
-}
-
-@media (max-width: 1300px) {
-    .header {
-        top: 20px;
     }
 }
 

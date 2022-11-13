@@ -11,6 +11,20 @@ html(lang="en")
         include pug/__header.pug
 
         main.main
+            mixin aside-nav-option(gotoClass,text)
+                .nav__section 
+                    .nav__text.active=text 
+                    a(href="" data-goto=gotoClass).nav__bullet.active
+            aside.nav
+                .nav__options
+                    +aside-nav-option('.about','О Нас')
+                    +aside-nav-option('.facility','Наши Услуги')
+                    +aside-nav-option('.doctors','Врачи')
+                    +aside-nav-option('.testimonials','Отзывы')
+                    +aside-nav-option('.address','Адреса клиник')
+                button.nav__up
+                    include pug/svg/arrow.svg   
+                    
             .container.large.start__wrapper
                 section.start
                     .start__image 

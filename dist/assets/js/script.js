@@ -1,4 +1,4 @@
-// ! slider
+// ! sliders
 $(document).ready(function () {
     $('.facility__slider').slick({
         arrows: true,
@@ -83,7 +83,7 @@ function rearrangeOptions(job, isActive) {
         allOptions[job] = 0;
     }
 }
-const doctorsContent =  document.querySelector('.doctors__content');
+const doctorsContent = document.querySelector('.doctors__content');
 function rearrangeList() {
     doctorsContent.classList.add('active');
     setTimeout(() => {
@@ -96,7 +96,7 @@ function rearrangeList() {
         }
         if (isEmpty) {
             showEverything();
-    
+
         } else {
             docArr.forEach(doc => {
                 if (allOptions[doc.dataset.job]) {
@@ -114,9 +114,10 @@ function rearrangeList() {
 function showEverything() {
     doctorsContent.classList.add('active');
     setTimeout(() => {
-    docArr.forEach(doc => {
-        doc.classList.add('_visible')
-    });}, 590);
+        docArr.forEach(doc => {
+            doc.classList.add('_visible')
+        });
+    }, 590);
 }
 
 function removeActiveClass(arr) {
@@ -140,190 +141,79 @@ const emptyStar = `<svg width="22" height="20" viewBox="0 0 22 20" fill="none" x
 
 starsArr.forEach(el => {
     let numOfStars = Number(el.innerHTML);
-    if (1<=numOfStars<=5) {
-       printStars(el,numOfStars);
-    } else if (numOfStars<0){
-        printStars(el,1);
-    } else{
-       printStars(el,5);
+    if (1 <= numOfStars <= 5) {
+        printStars(el, numOfStars);
+    } else if (numOfStars < 0) {
+        printStars(el, 1);
+    } else {
+        printStars(el, 5);
     }
-    console.log(el);
 });
 
-function printStars (el, numOfFull) {
+function printStars(el, numOfFull) {
     el.innerHTML = ``;
-    for(let i=1; i<=numOfFull; i++){
+    for (let i = 1; i <= numOfFull; i++) {
         el.innerHTML += starElement;
     }
-    if ((5-numOfFull) >= 1) {
-        for(let i=1; i<=(5-numOfFull); i++){
+    if ((5 - numOfFull) >= 1) {
+        for (let i = 1; i <= (5 - numOfFull); i++) {
             el.innerHTML += emptyStar;
         }
     }
 }
 
+// * aside nav
+// smooth scroll
+const asideNavLinks = document.querySelectorAll('.nav__bullet[data-goto]');
+if (asideNavLinks.length > 0) {
+    asideNavLinks.forEach(menuLink => {
+        menuLink.addEventListener('click', onAsideNavClick);
+    });
+    function onAsideNavClick(e) {
+        e.preventDefault();
+        const menuLink = e.target;
 
+        if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
+            const gotoBlock = document.querySelector(menuLink.dataset.goto);
+            const gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY - document.querySelector('header').offsetHeight;
+            window.scrollTo({
+                top: gotoBlockValue,
+                behavior: "smooth"
+            });
+            e.preventDefault();
+        }
+    }
+}
+const upButton = document.querySelector('button.nav__up');
+upButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 
+// show text when section is on screen
+const sections = document.querySelectorAll('section');
+const sectionsArr = Array.prototype.slice.call(sections);
 
-// $(document).ready(function () {
-//     $('.slider').slick({
-//         arrows: false,
-//         dots: true,
-//         slidesToShow: 3,
-//         slidesToScroll: 3,
-//         responsive: [
-//             {
-//                 breakpoint: 950,
-//                 settings: {
-//                     slidesToShow: 1,
-//                     slidesToScroll: 1,
-//                     arrows: true,
-//                     dots: false,
-//                 }
-//             }
-//         ]
-//     }
-//     );
-//     $('.blog-slider').slick({
-//         arrows: false,
-//         dots: true,
-//         slidesToShow: 1,
-//         slidesToScroll: 1,
-//         vertical: true,
-//         autoplay: true,
-//         pauseOnHover: true,
-//         pauseOnFocus: true,
-//         autoplaySpeed: 4000,
-//         verticalSwiping: true,
-//         asNavFor: ".blog-slider--second",
-//         responsive: [
-//             {
-//                 breakpoint: 671,
-//                 settings: {
-//                     vertical: false,
-//                     verticalSwiping: false
-//                 }
-//             }
-//         ]
-//     }
-//     );
-//     $('.blog-slider--second').slick({
-//         arrows: false,
-//         dots: true,
-//         slidesToShow: 1,
-//         slidesToScroll: 1,
-//         vertical: true,
-//         verticalSwiping: true,
-//         asNavFor: ".blog-slider",
-//         responsive: [
-//             {
-//                 breakpoint: 671,
-//                 settings: {
-//                     vertical: false,
-//                     verticalSwiping: false
-//                 }
-//             }
-//         ]
-//     }
-//     );
-// })
+let callback = (entries, observer) => {
+    entries.forEach((entry) => {
+        let elementClasses = entry.target.className;
+        asideNavLinks.forEach((link => {
+            if (elementClasses.includes(link.dataset.goto.slice(1, link.dataset.goto.length))) {
+                link.parentNode.children[0].classList.toggle('active');
+                link.classList.toggle('active');
+            }
+        }));
+    });
+};
 
-// // add margin to second section (as reasons are position: absolute)
-// const reasons = document.querySelector('.choose__reasons-wrap');
-// const chooseSection = document.querySelector('.choose');
+let observer = new IntersectionObserver(callback, { threshold: 0.6 });
 
-// window.addEventListener('load', addReasonsMargin);
-// window.addEventListener('resize', addReasonsMargin);
-// function addReasonsMargin() {
+window.addEventListener('DOMContentLoaded', () => {
+    sectionsArr.forEach(section => {
+        observer.observe(section);
+    });
+});
+// * -------------------------------------------------------------
 
-//     let rectBottomReasons = reasons.getBoundingClientRect();
-//     rectBottomReasons = rectBottomReasons.bottom;
-
-//     let rectBottomChoose = chooseSection.getBoundingClientRect();
-//     rectBottomChoose = rectBottomChoose.bottom;
-//     if (rectBottomReasons > rectBottomChoose) {
-//         chooseSection.style.marginBottom = `${rectBottomReasons - rectBottomChoose}px`
-//     }
-//     else {
-//         chooseSection.style.marginBottom = `0px`
-//     }
-// }
-
-// //* first screen scroll -------------------------------------
-// const exploreButton = document.querySelector('.start__explore');
-// const exploreButtonTwo = document.querySelector('.choose__explore-button');
-// const contactButton = document.querySelector('.start__contact');
-// addClickListener(exploreButton,'.blog');
-// addClickListener(exploreButtonTwo,'.blog');
-// addClickListener(contactButton,'.contact');
-
-// // smooth scroll (button)
-// function addClickListener (button, targetClass) {
-//     button.addEventListener('click', function (e) {
-//         scrollSmoothly(targetClass);
-//         e.preventDefault()
-//     });
-// }
-
-// function scrollSmoothly(targetClass) {
-//     const gotoBlock = document.querySelector(targetClass);
-
-//     const gotoBlockValue =
-//         gotoBlock.getBoundingClientRect().top + scrollY
-//         - document.querySelector('header').offsetHeight;
-
-//     window.scrollTo({
-//         top: gotoBlockValue,
-//         behavior: "smooth"
-//     });
-// }
-// //* ------------------ -------------------------------------
-
-
-// //* form input background animation----------------------
-// const inputCollection = document.querySelectorAll('.send-message__input');
-// const inputArr = Array.from(inputCollection);
-
-// // for every input (textarea)
-// inputArr.forEach(input => {
-//     //wrapper
-//     const bg = input.closest(".send-message__block");
-//     // wrapper children
-//     const bgArr = Array.from(bg.children);
-//     let label;
-//     //find closest label
-//     bgArr.forEach(element => {
-//         if (element.tagName == 'LABEL') {
-//             label = element;
-//         }
-//     });
-//     // if page refreshed
-//     if (input.value) {
-//         bg.classList.add('focus');
-//         label.classList.add('focus');
-//     }
-//     input.addEventListener('focus', function () {
-//         bg.classList.add('focus');
-//         label.classList.add('focus');
-//     });
-//     input.addEventListener('focusout', function () {
-//         // do not remove style if input contains text
-//         if (!input.value) {
-//             bg.classList.remove('focus');
-//             label.classList.remove('focus');
-//         }
-//     });
-// });
-// //* ---------------------------------------------------
-
-
-// // subscribe section email appear
-// const emailButton =  document.querySelector('.subscribe__button');
-// const emailForm =  document.querySelector('.subscribe__form');
-// emailButton.addEventListener('click', function(e){
-//     if (!emailButton.classList.contains('active')) {
-//         e.preventDefault();
-//         emailButton.classList.add('active');
-//         emailForm.classList.add('active');
-//     }
-// });
