@@ -861,6 +861,7 @@
 
     &__stats {
         display: flex;
+        white-space: nowrap;
         &-wrap {
             &::before {
                 content: "";
