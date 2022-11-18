@@ -825,7 +825,8 @@
     }
     @media (max-width: 400px) {
         width: 300px;
-        max-height: 185px;
+        height: auto;
+        max-height: 200px;
     }
     &__photo {
         border-radius: 0 50% 50% 50%;
