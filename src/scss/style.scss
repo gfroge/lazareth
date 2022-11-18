@@ -556,6 +556,9 @@
         position: absolute;
         top: 20px;
         left: 80px;
+        @media (max-width: 430px) {
+            display: none;
+        }
     }
     &__title {
         position: absolute;
@@ -913,8 +916,11 @@
             padding-right: 0;
             margin-left: -100px;
         }
-        @media (max-width: 1400px) {
+        @media (max-width: 400px) {
             width: 100%;
+            margin: 0 0 0 0;
+            position: static;
+            text-align: center;
         }
     }
 
@@ -942,6 +948,10 @@
     }
     @media (max-width: 390px) {
         width: 320px;
+    }
+    @media (max-width: 330px) {
+        width: 300px;
+        padding: 65px 65px 15px 25px;
     }
     &__text {
         font-size: 20px;
