@@ -1496,7 +1496,8 @@ html {
 @media (max-width: 400px) {
   .doc-card {
     width: 300px;
-    max-height: 185px;
+    height: auto;
+    max-height: 200px;
   }
 }
 .doc-card__photo {
