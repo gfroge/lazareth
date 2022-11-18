@@ -13,13 +13,14 @@ $HEADER-CONTAINER-RL-PADDING: 18px;
 $MENU-LINK-HOVER-COLOR: red;
 $LI-SPACE: 40px; // space between nav links
 $IS-CENTER: false; // burger links text align (left if false)
-$MOBILE-BREAKPOINT: 870px;
+$MOBILE-BREAKPOINT: 700px;
 %fixed-header-style {
     background-color: #fff;
 }
 
 %menu-link-hover-effect {
     transition: all 0.3s ease 0s;
+    font-weight: bold;
     &:after {
         transition: all 0.3s ease 0s;
         content: "";

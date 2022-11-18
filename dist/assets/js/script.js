@@ -1,3 +1,11 @@
+function scrollToBlock(where) {
+    const gotoBlock = document.querySelector(where);
+    const gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY - document.querySelector('header').offsetHeight;
+    window.scrollTo({
+        top: gotoBlockValue,
+        behavior: "smooth"
+    });
+}
 // ! sliders
 $(document).ready(function () {
     $('.facility__slider').slick({
@@ -6,6 +14,20 @@ $(document).ready(function () {
         slidesToShow: 3,
         autoplay: true,
         autoplaySpeed: 4000,
+        responsive: [
+            {
+                breakpoint: 1000,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
     });
     $('.testimonials__slider').slick({
         arrows: false,
@@ -13,6 +35,14 @@ $(document).ready(function () {
         slidesToShow: 2,
         autoplay: true,
         autoplaySpeed: 6000,
+        responsive: [
+            {
+                breakpoint: 1000,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
     });
 });
 
@@ -20,8 +50,10 @@ $(document).ready(function () {
 // ?facility popup
 const facilityOpenCollection = document.querySelectorAll('.facility-slide__btn');
 const facilityOpenArr = Array.prototype.slice.call(facilityOpenCollection);
+
 facilityOpenArr.forEach(btn => {
     btn.addEventListener('click', function () {
+        // show description
         openFacilityPopup(btn)
     });
 });
@@ -47,22 +79,26 @@ function closeFacilityPopup(btn) {
 }
 // ?---------------------------------
 
-// * doctors section
+// * doctors section and search
+// side list options
 const liCollection = document.querySelectorAll('.doctors__li');
 const liArr = Array.prototype.slice.call(liCollection);
-
+// doctors
 const docCollection = document.querySelectorAll('.doc-card');
 const docArr = Array.prototype.slice.call(docCollection);
 
-let allOptionsNum = 0;
+const doctorsContent = document.querySelector('.doctors__content');
 
+let allOptionsNum = 0;
+// allOptions keeps track of all options selected
 let allOptions = {}
 liArr.forEach(li => {
     allOptions[li.dataset.job] = 0;
 });
-// todo: order doctors by profession
+
 liArr.forEach(li => {
     li.addEventListener('click', function () {
+        // show everything
         if (li.dataset.job == 'any') {
             removeActiveClass(liArr);
             li.classList.add('active');
@@ -75,7 +111,7 @@ liArr.forEach(li => {
         }
     });
 });
-
+// update allOptions when side option is clicked
 function rearrangeOptions(job, isActive) {
     if (isActive) {
         allOptions[job] = 1;
@@ -83,10 +119,11 @@ function rearrangeOptions(job, isActive) {
         allOptions[job] = 0;
     }
 }
-const doctorsContent = document.querySelector('.doctors__content');
+
 function rearrangeList() {
     doctorsContent.classList.add('active');
     setTimeout(() => {
+        // check if nothig is selected => show everything
         let isEmpty = true;
         for (let i = 0; i < liArr.length; i++) {
             if (liArr[i].classList.contains('active')) {
@@ -97,7 +134,7 @@ function rearrangeList() {
         if (isEmpty) {
             showEverything();
 
-        } else {
+        } else { //something is selected
             docArr.forEach(doc => {
                 if (allOptions[doc.dataset.job]) {
                     doc.classList.add('_visible')
@@ -125,6 +162,89 @@ function removeActiveClass(arr) {
         el.classList.remove('active');
     });
 }
+
+// ? search
+const input = document.querySelector('.searchbar__input');
+const searchButton = document.querySelector('.searchbar__button');
+const searchResults = document.querySelector('.searchbar__result');
+
+const searchHint = document.querySelectorAll('.searchbar__option');
+const searchHintArr = Array.prototype.slice.call(searchHint);
+
+searchHintArr.forEach(hint => {
+    hint.addEventListener('click', function (e) {
+        input.value = hint.innerHTML;
+    });
+});
+
+// hint
+input.addEventListener('focus', function () {
+    onInputFieldInteraction()
+});
+input.addEventListener('input', function () {
+    onInputFieldInteraction()
+});
+
+function onInputFieldInteraction() {
+    let value = input.value.trim().toLowerCase()
+    if (value) {
+        searchResults.classList.remove('_hidden');
+        searchHintArr.forEach(hint => {
+            if (hint.innerHTML.toLowerCase().includes(value)) {
+                hint.classList.add('active')
+            } else {
+                hint.classList.remove('active')
+            }
+        });
+    } else {
+        searchResults.classList.add('_hidden');
+    }
+}
+
+
+input.addEventListener('focusout', function () {
+    setTimeout(() => {
+        if (!searchResults.classList.contains('_hidden')) {
+            searchResults.classList.add('_hidden');
+        }
+    }, 300);
+});
+
+function searchDoc(e) {
+    let serchQuery = null;
+    switch (input.value.trim().toLowerCase()) {
+        case 'терапевт':
+            serchQuery = 'therapist'
+            break;
+        case 'гинеколог':
+            serchQuery = 'gynecologist'
+            break;
+        case 'хирург':
+            serchQuery = 'surgeon'
+            break;
+        case 'стоматолог':
+            serchQuery = 'dentist'
+            break;
+        case 'узи' || 'уздг' || 'врач уздг':
+            serchQuery = 'ultrasound'
+            break;
+        default:
+            break;
+    }
+    removeActiveClass(liArr);
+    liArr.forEach(li => {
+        rearrangeOptions(li.dataset.job, false)
+        if (li.dataset.job == serchQuery) {
+            scrollToBlock('.doctors');
+            li.classList.add('active');
+            rearrangeOptions(li.dataset.job, true)
+            rearrangeList();
+        }
+    });
+    e.preventDefault();
+}
+searchButton.addEventListener('click', searchDoc);
+
 // *---------------------------------
 
 // ? testimonials
@@ -139,6 +259,7 @@ const emptyStar = `<svg width="22" height="20" viewBox="0 0 22 20" fill="none" x
 <path fill-rule="evenodd" clip-rule="evenodd" d="M11 16.0774L4.20233 20L6.0005 12.6007L-6.27882e-07 7.62547L7.91058 6.97573L11 0L14.09 6.97573L22 7.62547L15.9994 12.6007L17.7982 20L11 16.0774Z" fill="#b7b7b7"/>
 </svg>`;
 
+// show stars instead of their number 
 starsArr.forEach(el => {
     let numOfStars = Number(el.innerHTML);
     if (1 <= numOfStars <= 5) {
@@ -174,12 +295,7 @@ if (asideNavLinks.length > 0) {
         const menuLink = e.target;
 
         if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
-            const gotoBlock = document.querySelector(menuLink.dataset.goto);
-            const gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY - document.querySelector('header').offsetHeight;
-            window.scrollTo({
-                top: gotoBlockValue,
-                behavior: "smooth"
-            });
+            scrollToBlock(menuLink.dataset.goto);
             e.preventDefault();
         }
     }
@@ -196,7 +312,7 @@ upButton.addEventListener('click', () => {
 const sections = document.querySelectorAll('section');
 const sectionsArr = Array.prototype.slice.call(sections);
 
-let callback = (entries, observer) => {
+let callback = (entries) => {
     entries.forEach((entry) => {
         let elementClasses = entry.target.className;
         asideNavLinks.forEach((link => {
@@ -208,7 +324,10 @@ let callback = (entries, observer) => {
     });
 };
 
-let observer = new IntersectionObserver(callback, { threshold: 0.6 });
+let calcThreshold = () => (window.innerWidth >=1400) ? 0.6 : 0.3;
+
+
+let observer = new IntersectionObserver(callback, { threshold: calcThreshold() });
 
 window.addEventListener('DOMContentLoaded', () => {
     sectionsArr.forEach(section => {

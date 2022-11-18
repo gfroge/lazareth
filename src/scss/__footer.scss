@@ -2,12 +2,28 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 40px;
+    @media (max-width: 1200px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        row-gap: 40px;
+        column-gap: 20px;
+    }
+    @media (max-width: 550px) {
+        grid-template-columns: 1fr;
+        row-gap: 50px;
+    }
     &__col {
         max-width: 25%;
 
         &--social {
             display: flex;
             align-items: center;
+        }
+        @media (max-width: 1200px) {
+            max-width: none;
         }
     }
 

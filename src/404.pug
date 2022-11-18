@@ -6,15 +6,17 @@ html(lang="en")
         link(rel="stylesheet", href="assets/css/style.css")
         link(rel="shortcut icon", href="assets/images/favicon.ico", type="image/x-icon")
         title Лазарет центр
-    body
-        include pug/__header.pug
-        
-        main 
-            section.container.not-found 
-                .not-found__image 404 
-                .not-found__text 
-                    h1.not-found__title.text-primary Страница не найдена 
-                    a(href="index.html").not-found__back-link.primary-main Назад     
+    body 
+        .not-found__body
+            span 
+            include pug/__header.pug
 
-        include pug/__footer.pug
-        script(src="assets/js/header.js")
+            main 
+                section.container.not-found 
+                    .not-found__image 404 
+                    .not-found__text 
+                        h1.not-found__title.text-primary Страница не существует 
+                        a(href="index.html").not-found__back-link.primary-main Назад     
+
+            include pug/__footer.pug
+            script(src="assets/js/header.js")

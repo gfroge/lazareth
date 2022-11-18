@@ -1,11 +1,23 @@
-.facility__slider{
+.facility__slider {
     max-width: 1000px;
     position: relative;
     padding-top: 60px;
+    @media (max-width: 1000px) {
+        max-width: 100%;
+    }
+    .slick-slide.slick-active {
+        @media (max-width: 1000px) {
+            display: flex;
+            justify-content: center;
+        }
+    }
     .slick-track {
         display: flex;
         padding: 20px 0;
         margin-left: 10px;
+        @media (max-width: 1000px) {
+           justify-content: center;
+        }
     }
     .slick-arrow {
         position: absolute;
@@ -19,20 +31,30 @@
         background: url("../images/arrow.svg");
         background-position: center;
         background-repeat: no-repeat;
-        box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75);
-        -webkit-box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75);
-        -moz-box-shadow: 0px 0px 22px 2px rgba(202,202,202,0.75); 
-    } 
+        box-shadow: 0px 0px 22px 2px rgba(202, 202, 202, 0.75);
+        -webkit-box-shadow: 0px 0px 22px 2px rgba(202, 202, 202, 0.75);
+        -moz-box-shadow: 0px 0px 22px 2px rgba(202, 202, 202, 0.75);
+        @media (max-width: 1400px) {
+            left: 50%;
+        }
+    }
     .slick-arrow.slick-prev {
         right: 80px;
-    } 
+        @media (max-width: 1400px) {
+            margin-left:-80px;
+        }
+    }
     .slick-arrow.slick-next {
         right: 0px;
         transform: rotate(180deg);
-    } 
+
+        @media (max-width: 1400px) {
+            margin-left:20px;
+        }
+    }
 }
 
-.testimonials__slider{
+.testimonials__slider {
     max-width: 1000px;
     position: relative;
     padding-top: 60px;
@@ -40,87 +62,99 @@
         display: flex;
         padding: 20px 0;
         margin-left: 10px;
+        @media (max-width: 1000px) {
+            margin-left: 10%;
+        }
+        @media (max-width: 500px) {
+            margin-left: 0;
+        }
     }
     .slick-dots {
         display: flex;
         position: absolute;
         bottom: -50px;
         right: 30%;
+        @media (max-width: 1400px) {
+            left: 20%;
+        }
+        @media (max-width: 1400px) {
+            left: 50%;
+            margin-left: -75px;
+        }
     }
     .slick-dots li {
-        background-color: #B3E5FC;
+        background-color: #b3e5fc;
         transition: all 0.3s ease 0s;
         width: 30px;
         height: 30px;
         border-radius: 50%;
         &:not(:last-child) {
-             margin-right: 10px;
+            margin-right: 10px;
         }
-    } 
-    // Активная точка 
+    }
+    // Активная точка
     .slick-dots li.slick-active {
         background-color: #8cc6e1;
-    } 
-    // Элемент точки 
+    }
+    // Элемент точки
     .slick-dots li button {
         font-size: 0;
         color: transparent;
     }
 }
 
-// Слайдер 
+// Слайдер
 .slick-slider {
-} 
-// Слайдер запущен 
+}
+// Слайдер запущен
 .slick-slider.slick-initialized {
-} 
-// Слайдер с точками 
+}
+// Слайдер с точками
 .slick-slider.slick-dotted {
 }
-// Ограничивающая оболочка 
+// Ограничивающая оболочка
 .slick-list {
     overflow: hidden;
-} 
-// Лента слайдов 
+}
+// Лента слайдов
 .slick-track {
     display: flex;
 }
-// Слайд 
+// Слайд
 .slick-slide {
-
-} 
-// Слайд активный (показывается) 
+}
+// Слайд активный (показывается)
 .slick-slide.slick-active {
-} 
-// Слайд основной 
+}
+// Слайд основной
 .slick-slide.slick-current {
-} 
-// Слайд по центру 
+}
+// Слайд по центру
 .slick-slide.slick-center {
-} 
-// Клонированный слайд 
+}
+// Клонированный слайд
 .slick-slide.slick-cloned {
 }
-// Стрелка 
+// Стрелка
 .slick-arrow {
-} 
-// Стрелка влево 
+}
+// Стрелка влево
 .slick-arrow.slick-prev {
-} 
-// Стрелка вправо 
+}
+// Стрелка вправо
 .slick-arrow.slick-next {
-} 
-// Стрелка не активная 
+}
+// Стрелка не активная
 .slick-arrow.slick-disabled {
 }
-// Точки (булиты) 
+// Точки (булиты)
 .slick-dots {
 }
 .slick-dots li {
-} 
-// Активная точка 
+}
+// Активная точка
 .slick-dots li.slick-active {
-} 
-// Элемент точки 
+}
+// Элемент точки
 .slick-dots li button {
 }
