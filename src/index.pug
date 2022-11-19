@@ -70,7 +70,9 @@ html(lang="en")
             mixin facility-slide(path,alt='услуга',title,desc,popTitle,popOptions,popPrices,popTimetable)
                 .facility-slide
                     .facility-slide__image.ibg
-                        img(src=path, alt=alt)
+                        picture
+                            source(srcset=`${path}.webp`) 
+                            img(src=`${path}.jpg`, alt=alt) 
                     .facility-slide__info
                         .facility-slide__text
                             h5.facility-slide__title.text-primary=title
@@ -115,32 +117,32 @@ html(lang="en")
                     h2.h2.blue.facility__title Наши Услуги
                     .slider.facility__slider
                         .slider__item 
-                            +facility-slide('assets/images/facility/uzi.jpg','узи',
+                            +facility-slide('assets/images/facility/uzi','узи',
                         'УЗИ','УЗИ любых внутренних органов (без консультации врача)',
                         'Клиника 1', ['Обследование:','Консультация врача:'], ['5000₽','2000₽ (-15% при обследовании у нас)'],
                         ['12:00-14:00','12:00-14:00','12:00-14:00','12:00-14:00','14:00-16:00', '10:00-12:00','10:00-12:00'])
                         .slider__item
-                            +facility-slide('assets/images/facility/terapevt.jpg','терапевт',
+                            +facility-slide('assets/images/facility/terapevt','терапевт',
                         'Терапевт','Обследование, назначение лечения или анализов по жалобам пациента',
                         'Клиника 1, 2, 3', ['Консультация врача:'], ['1000₽'],
                         ['11:00-16:00','11:00-16:00','11:00-16:00','-','-', '10:00-12:00','10:00-12:00'])
                         .slider__item
-                            +facility-slide('assets/images/facility/ginekolog.jpg','гинеколог',
+                            +facility-slide('assets/images/facility/ginekolog','гинеколог',
                         'Гинеколог','Консультация и/или обследование',
                         'Клиника 2', ['Консультация врача:','Взятие мазка:'], ['2000₽','1000₽'],
                         ['14:00-18:00','-','12:00-14:00','-','14:00-16:00', '-','-'])
                         .slider__item
-                            +facility-slide('assets/images/facility/surgery.jpg','хирург',
+                            +facility-slide('assets/images/facility/surgery','хирург',
                         'Хирург','Переломы, вывихи, порезы, ожоги и другие травмы',
                         'Клиника 1,2', ['Обследование:','Наложение/Снятие гипса:','Обработка порезов, ожогов, вывихов'], ['1000₽','1500₽','1800₽'],
                         ['12:00-14:00','12:00-14:00','12:00-14:00','12:00-14:00','14:00-16:00', '10:00-12:00','10:00-12:00'])
                         .slider__item
-                            +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
+                            +facility-slide('assets/images/facility/dentist','стоматолог',
                         'Стоматолог (Ортодонт)','Профилактика и лечение зубо-челюстных аномалий',
                         'Клиника 3', ['Обследование и чистка:','Лечение одного зуба и установка пломбы:'], ['2000₽','5000₽'],
                         ['-','-','12:00-18:00','12:00-18:00','12:00-18:00', '-','-'])
                         .slider__item
-                            +facility-slide('assets/images/facility/dentist.jpg','стоматолог',
+                            +facility-slide('assets/images/facility/dentist','стоматолог',
                         'Стоматолог (Хирургия)','Удаление зубов, установка имплантов, лечение воспалительных процессов',
                         'Клиника 3', ['Обследование:','Импланты зубов:','Лечение воспалительных процессов:','Удаление одного зуба:'], ['1000₽','Цена сообщается индивидуально после обследования','2000₽','2000₽'],
                         ['12:00-18:00','12:00-14:00','12:00-18:00','12:00-14:00','-', '-','-'])
@@ -149,7 +151,9 @@ html(lang="en")
             mixin doc-card(src,alt,name,job,rating,exp,dataJob)
                 div(data-job=dataJob).doc-card._visible
                     .doc-card__photo.ibg
-                        img(src=src, alt=alt)
+                            picture
+                                source(srcset=`${src}.webp`) 
+                                img(src=`${src}.jpg`, alt=alt)
                     .doc-card__text   
                         .doc-card__name.text-primary=name 
                         .doc-card__job.text-secondary=job 
@@ -178,12 +182,12 @@ html(lang="en")
                                         strong 
                                             =arr[i]
                     .doctors__content
-                        +doc-card('assets/images/docs/1.jpg','фото врача','Лебедев Грирорий Николаевич','Хирург','100%','25 лет опыта','surgeon')
-                        +doc-card('assets/images/docs/5.jpg','фото врача','Петрова Жанна Алексеевна','Врач УЗДГ','95%','19 лет опыта','ultrasound')
-                        +doc-card('assets/images/docs/2.jpg','фото врача','Семёнов Олег Александрович','Терапевт','95%','15 лет опыта','therapist')
-                        +doc-card('assets/images/docs/6.jpg','фото врача','Шубин Сергей Дмитриевич','Стоматолог','90%','17 лет опыта','dentist')
-                        +doc-card('assets/images/docs/4.jpg','фото врача','Антонова Любовь Сергеевна','Гинеколог','100%','14 лет опыта','gynecologist')
-                        +doc-card('assets/images/docs/3.jpg','фото врача','Иванов Андрей Андреевич','Стоматолог','95%','20 лет опыта','dentist')
+                        +doc-card('assets/images/docs/1','фото врача','Лебедев Грирорий Николаевич','Хирург','100%','25 лет опыта','surgeon')
+                        +doc-card('assets/images/docs/5','фото врача','Петрова Жанна Алексеевна','Врач УЗДГ','95%','19 лет опыта','ultrasound')
+                        +doc-card('assets/images/docs/2','фото врача','Семёнов Олег Александрович','Терапевт','95%','15 лет опыта','therapist')
+                        +doc-card('assets/images/docs/6','фото врача','Шубин Сергей Дмитриевич','Стоматолог','90%','17 лет опыта','dentist')
+                        +doc-card('assets/images/docs/4','фото врача','Антонова Любовь Сергеевна','Гинеколог','100%','14 лет опыта','gynecologist')
+                        +doc-card('assets/images/docs/3','фото врача','Иванов Андрей Андреевич','Стоматолог','95%','20 лет опыта','dentist')
 
             mixin slider__item(text, starsNum, name, src)
                 .slider__item
@@ -194,22 +198,24 @@ html(lang="en")
                         .testimonial__user   
                             .testimonial__name.text-primary=name 
                             .testimonial__avatar.ibg
-                                img(src=src, alt="фото") 
+                                picture
+                                    source(srcset=`${src}.webp`) 
+                                    img(src=`${src}.jpg`, alt="фото")
             
             .container.large.testimonials__wrapper 
                 section.testimonials
                     h2.testimonials__title.h2.blue Отзывы
                     .testimonials__slider.slider
                         +slider__item('Хочу сказать большое Спасибо врачу Шубину Сергею Дмитриевичу! Вылечил зуб, с которым не могли помочь 3 разных врача из государственных поликлиник!', 5, 'Alex022',
-                         "assets/images/testimonials/default.jpg")
+                         "assets/images/testimonials/default")
                         +slider__item('Жанна Алексеевна отлично сделала узи! Лечащий врач сказал, что на снимках все отлично видно, и теперь можно поставить правильный диагноз', 5, 'Аня',
-                         "assets/images/testimonials/1.jpg")
+                         "assets/images/testimonials/1")
                         +slider__item('Приветливый персонал, красивые и чистые кабинеты. Правда к врачам порой приходится записываться за много дней, но ожидание того стоит', 4, 'Сергей',
-                         "assets/images/testimonials/2.jpg")
+                         "assets/images/testimonials/2")
                         +slider__item('Всегда хожу лечить зубы только в эту клинику', 5, 'Sonya1452',                   
-                        "assets/images/testimonials/default.jpg")
+                        "assets/images/testimonials/default")
                         +slider__item('Сергей Дмитриевич самый лучший стоматолог, которого я только видела. Сначала расстроил диагнозом, а потом назвал цену лечения и сразу стало легче на душе',
-                         4, 'Анила',"assets/images/testimonials/default.jpg")
+                         4, 'Анила',"assets/images/testimonials/default")
                 .appointment 
                     .appointment__text
                         h4.appointment__title.text-primary Запишитесь к врачу в два клика
